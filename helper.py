@@ -8,7 +8,6 @@ import json
 class Config:
     def __init__(self):
         current = pathlib.Path(__file__).parent.resolve()
-        self.background = current.joinpath("Images", "home.png")
 
         with open(current.joinpath("config.json")) as data_file:
             data = json.load(data_file)
