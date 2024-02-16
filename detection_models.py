@@ -26,7 +26,13 @@ class GunDetection:
         guns = gun_cascade.detectMultiScale(frame_gray, scaleFactor=1.3, minNeighbors=20, minSize=(100, 100))
 
         if len(guns) > 0:
-            return 'pistol'
+            total_area = frame_gray.shape[0] * frame_gray.shape[1]
+            max_area = max([(w * h) for (x, y, w, h) in guns])
+            confidence = max_area / total_area
+            if confidence > 0.05:
+                return 'pistol'
+            else:
+                return 'No pistol'
         else:
             return 'No pistol'
 
